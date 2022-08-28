@@ -28,7 +28,7 @@ def import_data(pth):
     '''
     df=pd.read_csv(pth)
     # creating churn column 
-    df['Churn'] = df['Attrition_Flag'].apply(lambda val: 0 if val ==                  "Existing Customer" else 1)
+    df['Churn'] = df['Attrition_Flag'].apply(lambda val: 0 if val =="Existing Customer" else 1)
     
     return df
 
@@ -72,7 +72,7 @@ def encoder_helper(df, category_lst, response):
     input:
             df: pandas dataframe
             category_lst: list of columns that contain categorical features
-            response: string of response name [optional argument that could be                used for naming variables or index y column]
+            response: string of response name [optional argument that could be used for naming variables or index y column]
 
     output:
             df: pandas dataframe with new columns for
@@ -95,7 +95,7 @@ def perform_feature_engineering(df, response):
     '''
     input:
               df: pandas dataframe
-              response: string of response name [optional argument that could be                       used for naming variables or index y column]
+              response: string of response name [optional argument that could be used for naming variables or index y column]
 
     output:
               X_train: X training data
@@ -113,8 +113,8 @@ def perform_feature_engineering(df, response):
     # keeping relevant columns
     keep_cols = ['Customer_Age', 'Dependent_count', 'Months_on_book',
              'Total_Relationship_Count', 'Months_Inactive_12_mon',
-             'Contacts_Count_12_mon', 'Credit_Limit',                                  'Total_Revolving_Bal', 'Avg_Open_To_Buy',                                  'Total_Amt_Chng_Q4_Q1', 'Total_Trans_Amt',
-             'Total_Trans_Ct', 'Total_Ct_Chng_Q4_Q1',                                  'Avg_Utilization_Ratio','Gender_Churn',                                    'Education_Level_Churn', 'Marital_Status_Churn', 
+             'Contacts_Count_12_mon', 'Credit_Limit','Total_Revolving_Bal', 'Avg_Open_To_Buy', 'Total_Amt_Chng_Q4_Q1', 'Total_Trans_Amt',
+             'Total_Trans_Ct', 'Total_Ct_Chng_Q4_Q1','Avg_Utilization_Ratio','Gender_Churn','Education_Level_Churn', 'Marital_Status_Churn', 
              'Income_Category_Churn', 'Card_Category_Churn']
     # creating predictors and the traget 
     y = df['Churn']
@@ -122,7 +122,7 @@ def perform_feature_engineering(df, response):
     df_modified = encoder_helper(df, category_lst,response)
     X[keep_cols]=df_modified[keep_cols]
     # train test split 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=                           0.3, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.3, random_state=42)
     return X_train, X_test, y_train, y_test 
 
 def classification_report_image(y_train,
@@ -147,18 +147,18 @@ def classification_report_image(y_train,
     '''
     # reporting random forest results 
     plt.rc('figure', figsize=(5, 5))
-    plt.text(0.01, 1.25, str('Random Forest Train'), {'fontsize': 10},                             fontproperties = 'monospace')
-    plt.text(0.01, 0.05, str(classification_report(y_test,                               y_test_preds_rf)), {'fontsize': 10}, fontproperties =                        'monospace')
-    plt.text(0.01, 0.6, str('Random Forest Test'), {'fontsize': 10},                      fontproperties = 'monospace')
-    plt.text(0.01, 0.7, str(classification_report(y_train,                       y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') 
+    plt.text(0.01, 1.25, str('Random Forest Train'), {'fontsize': 10},fontproperties = 'monospace')
+    plt.text(0.01, 0.05, str(classification_report(y_test,y_test_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace')
+    plt.text(0.01, 0.6, str('Random Forest Test'), {'fontsize': 10},  fontproperties = 'monospace')
+    plt.text(0.01, 0.7, str(classification_report(y_train, y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') 
     plt.axis('off')
     
     # reporting logistic regression results
     plt.rc('figure', figsize=(5, 5))
-    plt.text(0.01, 1.25, str('Logistic Regression Train'), {'fontsize':                10}, fontproperties = 'monospace')
-    plt.text(0.01, 0.05, str(classification_report(y_train,                       y_train_preds_lr)), {'fontsize': 10}, fontproperties =                        'monospace')
-    plt.text(0.01, 0.6, str('Logistic Regression Test'), {'fontsize': 10},               fontproperties = 'monospace')
-    plt.text(0.01, 0.7, str(classification_report(y_test,                         y_test_preds_lr)), {'fontsize': 10}, fontproperties = 'monospace') 
+    plt.text(0.01, 1.25, str('Logistic Regression Train'), {'fontsize':10}, fontproperties = 'monospace')
+    plt.text(0.01, 0.05, str(classification_report(y_train, y_train_preds_lr)), {'fontsize': 10}, fontproperties = 'monospace')
+    plt.text(0.01, 0.6, str('Logistic Regression Test'), {'fontsize': 10},  fontproperties = 'monospace')
+    plt.text(0.01, 0.7, str(classification_report(y_test,  y_test_preds_lr)), {'fontsize': 10}, fontproperties = 'monospace') 
     plt.axis('off')
 
 
@@ -178,7 +178,7 @@ def feature_importance_plot(model, X_data, output_pth):
     # Sort feature importances in descending order
     indices = np.argsort(importances)[::-1]
 
-    # Rearrange feature names so they match the sorted feature                        importances
+    # Rearrange feature names so they match the sorted feature importances
     names = [X_data.columns[i] for i in indices]
 
     # Create plot
