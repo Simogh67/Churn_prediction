@@ -12,7 +12,7 @@ To run the scripts:
 
 **python churn_library.py**
 
-**python churn_script_logging_and_tests.py**
+**python test_churn.py**
 
 running the scripts generates the following items:
 
