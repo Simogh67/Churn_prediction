@@ -14,7 +14,7 @@ The test functions use the return of path() as an argument
 """
 @pytest.fixture(scope="module")
 def path():
-    return 'bank_data.csv'
+    return './data/bank_data.csv'
 
 def test_import(path):
     '''
